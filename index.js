@@ -100,7 +100,7 @@ const fi = (function() {
             i--
           }
         } else{
-          array.splice(i, 0, a)
+          array.splice(i, 0, a[0])
         }
         
         l = array.length
