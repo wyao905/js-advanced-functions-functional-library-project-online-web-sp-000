@@ -124,7 +124,13 @@ const fi = (function() {
     },
     
     uniq: function(array, isSorted, callback) {
-      
+      let r = [array[0]]
+      for(let i = 1; i < array.length; i++) {
+        if(array[i - 1] !== array[i]) {
+          r.push(array[i])
+        }
+      }
+      return r
     },
 
     functions: function() {
