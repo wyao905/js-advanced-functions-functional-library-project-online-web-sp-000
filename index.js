@@ -124,42 +124,38 @@ const fi = (function() {
     },
     
     uniq: function(array, isSorted, callback) {
-      let r
       if(isSorted) {
-        r = [array[0]]
         for(let i = 1; i < array.length; i++) {
           if(!!callback) {
-            if(callback(array[i - 1]) !== callback(array[i])) {
-              r.push(array[i])
+            if(callback(array[i - 1]) === callback(array[i])) {
+              array.splice(i, 1)
+              i--
             }
           } else {
-            if(array[i - 1] !== array[i]) {
-              r.push(array[i])
+            if(array[i - 1] === array[i]) {
+              array.splice(i, 1)
+              i--
             }
           }
         }
       } else {
-        r = []
         for(let i = 0; i < array.length; i++) {
-          let unique = true
           for (let j = 0; j < array.length; j++) {
             if(!!callback) {
               if(callback(array[i]) === callback(array[j]) && i !== j) {
-                unique = false
+                array.splice(j, 1)
+                j--
               }
             } else {
               if(array[i] === array[j] && i !== j) {
-                unique = false
+                array.splice(j, 1)
+                j--
               }
             }
           }
-          if(unique) {
-            r.push(array[i])
-          }
         }
       }
-      
-      return r
+      return array
     },
 
     functions: function() {
