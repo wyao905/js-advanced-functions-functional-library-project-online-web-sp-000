@@ -122,6 +122,10 @@ const fi = (function() {
       
       return array
     },
+    
+    uniq: function(array, isSorted, callback) {
+      
+    },
 
     functions: function() {
     },
