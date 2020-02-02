@@ -90,7 +90,17 @@ const fi = (function() {
     
     flatten: function(array, shallow) {
       if(shallow) {
-        
+        for(let i = 0; i < array.length; i++) {
+          let a = array.splice(i, 1)
+          if(Array.isArray(a[0])) {
+            for(let j = 0; j < a[0].length; j++) {
+              array.splice(i + j, 0, a[0][j])
+            }
+            i = i + a[0].length - 1
+          } else{
+            array.splice(i, 0, a[0])
+          }
+        }
       } else {
         let l = array.length
         for(let i = 0; i < l; i++) {
