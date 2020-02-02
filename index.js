@@ -134,12 +134,14 @@ const fi = (function() {
       } else {
         let r = []
         for(let i = 0; i < array.length; i++) {
+          let unique = true
           for (let j = 0; j < array.length; j++) {
-            if(!(array[i] === array[j] && i !== j)) {
-              
-            } else {
-              
+            if(array[i] === array[j] && i !== j) {
+              unique = false
             }
+          }
+          if(unique) {
+            r.push(array[i])
           }
         }
       }
