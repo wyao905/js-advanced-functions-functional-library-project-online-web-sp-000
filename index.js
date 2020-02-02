@@ -174,7 +174,14 @@ const fi = (function() {
       return r
     },
 
-    functions: function() {
+    functions: function(object) {
+      let r = []
+      for(let a in object) {
+        if(typeof a === "function") {
+          r.push(a)
+        }
+      }
+      return r
     },
   }
 })()
