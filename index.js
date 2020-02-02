@@ -165,6 +165,14 @@ const fi = (function() {
       }
       return r
     },
+    
+    values: function(object) {
+      let r = []
+      for(let e in object) {
+        r.push(object[e])
+      }
+      return r
+    },
 
     functions: function() {
     },
