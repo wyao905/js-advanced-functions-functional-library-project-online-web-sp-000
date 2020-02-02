@@ -89,24 +89,24 @@ const fi = (function() {
     },
     
     flatten: function(array, shallow) {
-      let flat = []
-      if(shallow !== true) {
-        while(array.length){
-          let a = array.shift
-          if(Array.isArray(a)){
-            array = a.concat(array)
-          } else {
-            flat.push(a)
+      let l = array.length
+      for(let i = 0; i < l; i++) {
+        let a = array.splice(i, 1)
+        if(Array.isArray(a)) {
+          for(let j = 0; j < a.length; j++) {
+            array.splice(i + j, 0, a[j])
           }
+          if(Array.isArray(array[i])) {
+            i--
+          }
+        } else{
+          array.splice(i, 0, a)
         }
-      } else {
-        let a = array.shift
-        if(Array.isArray(a)){
-          array = a.concat(array)
-        } else {
-          flat.push(a)
-        }
+        
+        l = array.length
       }
+      
+      return array
     },
 
     functions: function() {
