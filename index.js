@@ -134,8 +134,12 @@ const fi = (function() {
       } else {
         let r = []
         for(let i = 0; i < array.length; i++) {
-          for (let j = 1; j < array.length; j++) {
-            if(array[i] !== array[j])
+          for (let j = 0; j < array.length; j++) {
+            if(!(array[i] === array[j] && i !== j)) {
+              
+            } else {
+              
+            }
           }
         }
       }
