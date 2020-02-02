@@ -127,8 +127,14 @@ const fi = (function() {
       if(isSorted) {
         let r = [array[0]]
         for(let i = 1; i < array.length; i++) {
-          if(array[i - 1] !== array[i]) {
-            r.push(array[i])
+          if(!!callback) {
+            if(callback(array[i - 1]) !== callback(array[i])) {
+              r.push(array[i])
+            }
+          } else {
+            if(array[i - 1] !== array[i]) {
+              r.push(array[i])
+            }
           }
         }
       } else {
@@ -136,8 +142,14 @@ const fi = (function() {
         for(let i = 0; i < array.length; i++) {
           let unique = true
           for (let j = 0; j < array.length; j++) {
-            if(array[i] === array[j] && i !== j) {
-              unique = false
+            if(!!callback) {
+              if(callback(array[i]) === callback(array[j]) && i !== j) {
+                unique = false
+              }
+            } else {
+              if(array[i] === array[j] && i !== j) {
+                unique = false
+              }
             }
           }
           if(unique) {
