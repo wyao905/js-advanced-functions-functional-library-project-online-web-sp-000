@@ -124,8 +124,9 @@ const fi = (function() {
     },
     
     uniq: function(array, isSorted, callback) {
+      let r
       if(isSorted) {
-        let r = [array[0]]
+        r = [array[0]]
         for(let i = 1; i < array.length; i++) {
           if(!!callback) {
             if(callback(array[i - 1]) !== callback(array[i])) {
@@ -138,7 +139,7 @@ const fi = (function() {
           }
         }
       } else {
-        let r = []
+        r = []
         for(let i = 0; i < array.length; i++) {
           let unique = true
           for (let j = 0; j < array.length; j++) {
