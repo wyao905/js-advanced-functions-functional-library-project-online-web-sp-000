@@ -159,7 +159,11 @@ const fi = (function() {
     },
     
     keys: function(object) {
-      
+      let r = []
+      for(let e in object) {
+        r.push(e)
+      }
+      return r
     },
 
     functions: function() {
