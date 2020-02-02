@@ -157,6 +157,10 @@ const fi = (function() {
       }
       return array
     },
+    
+    keys: function(object) {
+      
+    },
 
     functions: function() {
     },
