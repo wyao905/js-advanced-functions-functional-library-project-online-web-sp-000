@@ -177,7 +177,7 @@ const fi = (function() {
     functions: function(object) {
       let r = []
       for(let a in object) {
-        if(typeof a == "function") {
+        if(typeof object[a] == "function") {
           r.push(a)
         }
       }
