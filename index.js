@@ -92,7 +92,7 @@ const fi = (function() {
       let l = array.length
       for(let i = 0; i < l; i++) {
         let a = array.splice(i, 1)
-        if(Array.isArray(a)) {
+        if(Array.isArray(a[0])) {
           for(let j = 0; j < a.length; j++) {
             array.splice(i + j, 0, a[j])
           }
