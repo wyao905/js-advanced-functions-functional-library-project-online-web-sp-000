@@ -89,27 +89,99 @@ const fi = (function() {
     },
     
     flatten: function(array, shallow) {
-      let flat = []
-      if(shallow !== true) {
-        while(array.length){
-          let a = array.shift
-          if(Array.isArray(a)){
-            array = a.concat(array)
-          } else {
-            flat.push(a)
+      if(shallow) {
+        for(let i = 0; i < array.length; i++) {
+          let a = array.splice(i, 1)
+          if(Array.isArray(a[0])) {
+            for(let j = 0; j < a[0].length; j++) {
+              array.splice(i + j, 0, a[0][j])
+            }
+            i = i + a[0].length - 1
+          } else{
+            array.splice(i, 0, a[0])
           }
         }
       } else {
-        let a = array.shift
-        if(Array.isArray(a)){
-          array = a.concat(array)
-        } else {
-          flat.push(a)
+        let l = array.length
+        for(let i = 0; i < l; i++) {
+          let a = array.splice(i, 1)
+          if(Array.isArray(a[0])) {
+            for(let j = 0; j < a[0].length; j++) {
+              array.splice(i + j, 0, a[0][j])
+            }
+            if(Array.isArray(array[i])) {
+              i--
+            }
+          } else{
+            array.splice(i, 0, a[0])
+          }
+          
+          l = array.length
         }
       }
+      
+      return array
+    },
+    
+    uniq: function(array, isSorted, callback) {
+      if(isSorted) {
+        for(let i = 1; i < array.length; i++) {
+          if(!!callback) {
+            if(callback(array[i - 1]) === callback(array[i])) {
+              array.splice(i, 1)
+              i--
+            }
+          } else {
+            if(array[i - 1] === array[i]) {
+              array.splice(i, 1)
+              i--
+            }
+          }
+        }
+      } else {
+        for(let i = 0; i < array.length; i++) {
+          for (let j = 0; j < array.length; j++) {
+            if(!!callback) {
+              if(callback(array[i]) === callback(array[j]) && i !== j) {
+                array.splice(j, 1)
+                j--
+              }
+            } else {
+              if(array[i] === array[j] && i !== j) {
+                array.splice(j, 1)
+                j--
+              }
+            }
+          }
+        }
+      }
+      return array
+    },
+    
+    keys: function(object) {
+      let r = []
+      for(let e in object) {
+        r.push(e)
+      }
+      return r
+    },
+    
+    values: function(object) {
+      let r = []
+      for(let e in object) {
+        r.push(object[e])
+      }
+      return r
     },
 
-    functions: function() {
+    functions: function(object) {
+      let r = []
+      for(let a in object) {
+        if(typeof object[a] == "function") {
+          r.push(a)
+        }
+      }
+      return r
     },
   }
 })()
